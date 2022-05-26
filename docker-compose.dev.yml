@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  app:
+    container_name: emo-server-express
+    build:
+      context: ./
+      dockerfile: ./docker/express/Dockerfile
+    working_dir: /home/node/app
+    command: npm start
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - emo-server-express-network
+    depends_on:
+      - database
+    ports:
+      - 9000:6000
+    environment:
+      APP_ENV: dev
+      PORT: 6000
+      ENABLE_SWAGGER: ${ENABLE_SWAGGER}
+      ENABLE_CORS: ${ENABLE_CORS}
+
+  database:
+    container_name: emo-server-express-database
+    image: postgres:14.1
+    restart: unless-stopped
+    volumes:
+      - emo-server-express-database:/var/lib/postgres
+      - ./docker/postgres/database:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_DB: emo
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - 54321:5432
+    networks:
+      - emo-server-express-network
+
+networks:
+  emo-server-express-network:
+    driver: bridge
+
+volumes:
+  emo-server-express-database:
+    driver: local

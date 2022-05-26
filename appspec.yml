@@ -1,0 +1,30 @@
+  version: 0.0
+  os: linux
+  files:
+    - source: /
+      destination: /home/ubuntu/nekoverse-server-express
+  permissions:
+    - object: /home/ubuntu
+      owner: ubuntu
+      group: ubuntu
+      type:
+        - directory
+        - file
+  hooks:
+    BeforeInstall:
+      - location: scripts/beforeinstall.sh
+        timeout: 300
+        runas: ubuntu
+    Install:
+      - location: scripts/install.sh
+        timeout: 300
+        runas: ubuntu
+    AfterInstall:
+      - location: scripts/afterinstall.sh
+        timeout: 300
+        runas: ubuntu
+    ApplicationStart:
+      - location: scripts/reload-pm2.sh
+        timeout: 300
+        runas: ubuntu
+

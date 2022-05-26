@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  app:
+    container_name: emo-server-express
+    build:
+      context: ./
+      dockerfile: ./docker/colyseus/Dockerfile
+    working_dir: /home/node/app
+    command: npm start
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - emo-server-express-network
+    environment:
+      JWT_SECRET: t2hYYHjq@]a@vbYnb.d)EybQ?x5[fG_Lvfwn"6XLms]V%MH+[2:[#<?-dzz>5#.E
+      APP_ENV: dev
+      PORT: 8000
+      DB_HOST: database
+      DB_DATABASE: emo
+      DB_USERNAME: root
+      DB_PASSWORD: 123456
+      DB_PORT: 5432
+networks:
+  emo-server-express-network:
+    external: true
