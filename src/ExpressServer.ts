@@ -1,7 +1,5 @@
 import express, { Response as ExResponse, Request as ExRequest } from "express";
 import logger from "./loggers/logger";
-import errorMiddleware from "./middlewares/errorMiddleware";
-import accessLoggerMiddleware from "./middlewares/accessLoggerMiddleware";
 import swaggerUi from "swagger-ui-express";
 import morgan from "morgan";
 import cors from "cors";
@@ -40,7 +38,6 @@ export default class ExpressServer {
   }
 
   private initializeMiddlewares() {
-    this.app.use(accessLoggerMiddleware);
 
     this.app.use(express.json({ limit: "50mb" }));
     this.app.use(express.urlencoded({ extended: false, limit: "50mb" }));
@@ -92,7 +89,6 @@ export default class ExpressServer {
   }
 
   private initializeErrorHandling() {
-    this.app.use(errorMiddleware);
   }
 
   public start() {

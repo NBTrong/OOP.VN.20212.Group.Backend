@@ -35,6 +35,8 @@ const config: { [key: string]: K.Config } = {
   },
 };
 
+// const db = Knex(config.production);
+
 const db =
   process.env.APP_ENV !== "production"
     ? KnexLogger(Knex(config.production))

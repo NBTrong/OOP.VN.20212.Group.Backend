@@ -28,7 +28,7 @@
 		}
 	},
 	"info": {
-		"title": "nekoverse-server-express",
+		"title": "emo-server-express",
 		"version": "1.0.0",
 		"license": {
 			"name": "UNLICENSED"
@@ -37,9 +37,9 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/neko": {
+		"/test": {
 			"get": {
-				"operationId": "GetListNekos",
+				"operationId": "Test",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -73,47 +73,11 @@
 						}
 					}
 				},
-				"description": "Get NFT list by game ID.\nAll query params are optional.",
-				"summary": "admin",
 				"tags": [
-					"Neko"
+					"Test"
 				],
 				"security": [],
-				"parameters": [
-					{
-						"in": "query",
-						"name": "ids",
-						"required": false,
-						"schema": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						}
-					},
-					{
-						"in": "query",
-						"name": "trait_neko_ids",
-						"required": false,
-						"schema": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						}
-					},
-					{
-						"in": "query",
-						"name": "neko_class_ids",
-						"required": false,
-						"schema": {
-							"type": "array",
-							"items": {
-								"type": "string"
-							}
-						}
-					}
-				]
+				"parameters": []
 			}
 		}
 	},

@@ -6,7 +6,7 @@ services:
       context: ./
       dockerfile: ./docker/express/Dockerfile
     working_dir: /home/node/app
-    command: npm start
+    # command: npm start
     restart: unless-stopped
     tty: true
     volumes:
@@ -32,7 +32,7 @@ services:
       - emo-server-express-database:/var/lib/postgres
       - ./docker/postgres/database:/docker-entrypoint-initdb.d
     environment:
-      POSTGRES_DB: emo
+      POSTGRES_DB: emoDatabase
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 123456
     ports:
