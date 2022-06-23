@@ -42,24 +42,25 @@ export default class ExpressServer {
     this.app.use(express.json({ limit: "50mb" }));
     this.app.use(express.urlencoded({ extended: false, limit: "50mb" }));
     this.app.use(morgan("tiny"));
-    if (process.env.ENABLE_CORS) {
-      this.app.use(cors());
-    } else {
-      this.app.use(cors(corsOptionsDelegate));
-    }
+    this.app.use(cors());
+    // if (process.env.ENABLE_CORS) {
+    // } else {
+    //   this.app.use(cors(corsOptionsDelegate));
+    // }
     this.app.use(express.static("public"));
     this.app.disable("etag");
-    if (process.env.ENABLE_SWAGGER) {
-      this.app.use(
-        "/swagger",
-        swaggerUi.serve,
-        async (_req: ExRequest, res: ExResponse) => {
-          return res.send(
-            swaggerUi.generateHTML(await import("../public/swagger.json"))
-          );
-        }
-      );
-    }
+    console.log("davao day")
+    this.app.use(
+      "/swagger",
+      swaggerUi.serve,
+      async (_req: ExRequest, res: ExResponse) => {
+        return res.send(
+          swaggerUi.generateHTML(await import("../public/swagger.json"))
+        );
+      }
+    );
+    // if (process.env.ENABLE_SWAGGER) {
+    // }
   }
 
   private initializeRoutes() {

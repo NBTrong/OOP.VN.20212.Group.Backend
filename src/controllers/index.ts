@@ -1,1 +1,1 @@
-export * from './v1/TestController';
+export * from './v1/IncomeController';

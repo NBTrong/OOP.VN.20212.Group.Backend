@@ -3,7 +3,7 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { TestController } from './../controllers/v1/TestController';
+import { IncomeController } from './../controllers/v1/IncomeController';
 import type { RequestHandler } from 'express';
 import * as express from 'express';
 
@@ -20,12 +20,13 @@ export function RegisterRoutes(app: express.Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/test',
-            ...(fetchMiddlewares<RequestHandler>(TestController)),
-            ...(fetchMiddlewares<RequestHandler>(TestController.prototype.Test)),
+        app.post('/api/v1/income',
+            ...(fetchMiddlewares<RequestHandler>(IncomeController)),
+            ...(fetchMiddlewares<RequestHandler>(IncomeController.prototype.getListIncome)),
 
-            function TestController_Test(request: any, response: any, next: any) {
+            function IncomeController_getListIncome(request: any, response: any, next: any) {
             const args = {
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"userKey":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -34,10 +35,10 @@ export function RegisterRoutes(app: express.Router) {
             try {
                 validatedArgs = getValidatedArgs(args, request, response);
 
-                const controller = new TestController();
+                const controller = new IncomeController();
 
 
-              const promise = controller.Test.apply(controller, validatedArgs as any);
+              const promise = controller.getListIncome.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

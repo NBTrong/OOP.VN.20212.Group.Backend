@@ -37,9 +37,9 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/test": {
-			"get": {
-				"operationId": "Test",
+		"/api/v1/income": {
+			"post": {
+				"operationId": "GetListIncome",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -74,10 +74,28 @@
 					}
 				},
 				"tags": [
-					"Test"
+					"Income"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"userKey": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"userKey"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
 			}
 		}
 	},
