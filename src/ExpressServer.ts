@@ -5,25 +5,6 @@ import morgan from "morgan";
 import cors from "cors";
 import { RegisterRoutes } from "@n-routes/routes";
 
-var whitelist = [
-  "https://nekowallet-dev-admin.nekoglobaldev.com",
-  "https://nekowallet-stag-admin.nekoglobaldev.com",
-  "https://nekowallet-dev-api.nekoglobaldev.com",
-  "https://nekowallet-stag-api.nekoglobaldev.com",
-  "https://nekowallet-admin.nekoglobaldev.com",
-  "https://nekowallet-stag-api.nekoglobaldev.com",
-  "http://localhost:9000",
-];
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  if (whitelist.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false }; // disable CORS for this request
-  }
-  callback(null, corsOptions); // callback expects two parameters: error and options
-};
-
 export default class ExpressServer {
   private app: express.Application;
   private readonly port: number;
@@ -43,13 +24,8 @@ export default class ExpressServer {
     this.app.use(express.urlencoded({ extended: false, limit: "50mb" }));
     this.app.use(morgan("tiny"));
     this.app.use(cors());
-    // if (process.env.ENABLE_CORS) {
-    // } else {
-    //   this.app.use(cors(corsOptionsDelegate));
-    // }
     this.app.use(express.static("public"));
     this.app.disable("etag");
-    console.log("davao day")
     this.app.use(
       "/swagger",
       swaggerUi.serve,
@@ -59,8 +35,6 @@ export default class ExpressServer {
         );
       }
     );
-    // if (process.env.ENABLE_SWAGGER) {
-    // }
   }
 
   private initializeRoutes() {
@@ -77,7 +51,6 @@ export default class ExpressServer {
     );
 
     RegisterRoutes(this.app);
-    // console.log(this.app._router)
 
     this.app.use(function (
       req: express.Request,

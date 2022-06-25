@@ -37,7 +37,7 @@ CategoryModel.relationMappings = {
   },
 
   incomes: {
-    relation: ExtendedModel.HasManyRelation,
+    relation: ExtendedModel.BelongsToOneRelation,
     modelClass: () => Income,
     join: {
       from: "categories.id",

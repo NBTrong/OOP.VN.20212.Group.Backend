@@ -37,6 +37,294 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/api/v1/expense": {
+			"post": {
+				"operationId": "GetListExpense",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Expense"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"userKey": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"userKey"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/expense/create": {
+			"post": {
+				"operationId": "CreateExpense",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Expense"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"color": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"note": {
+										"type": "string"
+									},
+									"amount": {
+										"type": "number",
+										"format": "double"
+									},
+									"userKey": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"userKey"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/expense/update": {
+			"post": {
+				"operationId": "UpdateExpense",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Expense"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"category": {
+										"properties": {
+											"color": {
+												"type": "string"
+											},
+											"name": {
+												"type": "string"
+											},
+											"id": {
+												"type": "number",
+												"format": "double"
+											}
+										},
+										"required": [
+											"id"
+										],
+										"type": "object"
+									},
+									"note": {
+										"type": "string"
+									},
+									"amount": {
+										"type": "number",
+										"format": "double"
+									},
+									"userKey": {
+										"type": "string"
+									},
+									"id": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"userKey",
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/expense/delete": {
+			"delete": {
+				"operationId": "DeleteExpense",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Expense"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/api/v1/income": {
 			"post": {
 				"operationId": "GetListIncome",
@@ -90,6 +378,529 @@
 								},
 								"required": [
 									"userKey"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/income/create": {
+			"post": {
+				"operationId": "CreateIncome",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Income"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"color": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"note": {
+										"type": "string"
+									},
+									"amount": {
+										"type": "number",
+										"format": "double"
+									},
+									"userKey": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"userKey"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/income/update": {
+			"post": {
+				"operationId": "Update",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Income"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"category": {
+										"properties": {
+											"color": {
+												"type": "string"
+											},
+											"name": {
+												"type": "string"
+											},
+											"id": {
+												"type": "number",
+												"format": "double"
+											}
+										},
+										"required": [
+											"id"
+										],
+										"type": "object"
+									},
+									"note": {
+										"type": "string"
+									},
+									"amount": {
+										"type": "number",
+										"format": "double"
+									},
+									"userKey": {
+										"type": "string"
+									},
+									"id": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"userKey",
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/income/delete": {
+			"delete": {
+				"operationId": "DeleteIncome",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Income"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/wishList": {
+			"post": {
+				"operationId": "GetListWishList",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"wishList"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"userKey": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"userKey"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/wishList/create": {
+			"post": {
+				"operationId": "CreateWishList",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"wishList"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"listIndex": {
+										"type": "number",
+										"format": "double"
+									},
+									"color": {
+										"type": "string"
+									},
+									"name": {
+										"type": "string"
+									},
+									"note": {
+										"type": "string"
+									},
+									"amount": {
+										"type": "number",
+										"format": "double"
+									},
+									"userKey": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"userKey"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/wishList/update": {
+			"post": {
+				"operationId": "UpdateWishList",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"wishList"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"category": {
+										"properties": {
+											"color": {
+												"type": "string"
+											},
+											"name": {
+												"type": "string"
+											},
+											"id": {
+												"type": "number",
+												"format": "double"
+											}
+										},
+										"required": [
+											"id"
+										],
+										"type": "object"
+									},
+									"listIndex": {
+										"type": "number",
+										"format": "double"
+									},
+									"note": {
+										"type": "string"
+									},
+									"amount": {
+										"type": "number",
+										"format": "double"
+									},
+									"userKey": {
+										"type": "string"
+									},
+									"id": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"userKey",
+									"id"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/wishList/delete": {
+			"delete": {
+				"operationId": "DeleteWishList",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"wishList"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "number",
+										"format": "double"
+									}
+								},
+								"required": [
+									"id"
 								],
 								"type": "object"
 							}

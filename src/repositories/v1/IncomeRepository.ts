@@ -21,7 +21,20 @@ export class IncomeRepository
     return query.where("user_key", filter.userKey);
   }
 
-  async list(filter: IncomeFilter): Promise<typeof Income["prototype"]> {
+  async list(filter: IncomeFilter): Promise<typeof Income["prototype"][]> {
     return await IncomeRepository.queryFilter(this.model.query(), filter)
+  }
+
+  async create(data: typeof Income["prototype"]): Promise<typeof Income["prototype"]> {
+    return await this.model.query().insert(data);
+  }
+
+  async updateById(id: number, data: any): Promise<typeof Income["prototype"]> {
+    return await this.model.query().updateAndFetchById(id, data);
+  }
+
+  async deleteById(id: string | number): Promise<boolean> {
+    const result = await this.model.query().deleteById(id);
+    return result === 1 ? true : false;
   }
 }

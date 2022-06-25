@@ -6,12 +6,12 @@ class Income extends ExtendedModel {
   id!: number;
   amount?: number;
   note?: string;
-  user_key: string;
+  user_key!: string;
   category_id: number;
   created_at?: Date | string | null;
   updated_at?: Date | string | null;
 
-  static tableName = "expenses";
+  static tableName = "income";
 
   static jsonSchema = {
     type: "object",
@@ -37,7 +37,7 @@ IncomeModel.relationMappings = {
     relation: ExtendedModel.BelongsToOneRelation,
     modelClass: () => Category,
     join: {
-      from: "incomes.category_id",
+      from: "income.category_id",
       to: "categories.id",
     },
   }

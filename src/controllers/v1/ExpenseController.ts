@@ -9,21 +9,21 @@ import {
 } from "@tsoa/runtime";
 import { lazyInject } from "@n-configs/container";
 import { SERVICES } from "@n-types/injections/services";
-import { IIncomeServices } from "@n-services/interface";
+import { IExpenseServices } from "@n-services/interface";
 
 @injectable()
-@Tags("Income")
-@Route("/api/v1/income")
-export class IncomeController {
-  @lazyInject(SERVICES.IncomeServices)
-  private IncomeServices: IIncomeServices;
+@Tags("Expense")
+@Route("/api/v1/expense")
+export class ExpenseController {
+  @lazyInject(SERVICES.ExpenseServices)
+  private ExpenseServices: IExpenseServices;
 
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/")
-  async getListIncome(
+  async getListExpense(
     @Body() body: { userKey: string },
   ): Promise<any> {
-    const result = await this.IncomeServices.list(body);
+    const result = await this.ExpenseServices.list(body);
     return {
       status: 200,
       message: "success",
@@ -33,7 +33,7 @@ export class IncomeController {
 
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/create")
-  async createIncome(
+  async createExpense(
     @Body() body: { 
       userKey: string,
       amount?: number,
@@ -42,7 +42,7 @@ export class IncomeController {
       color?: string,
     },
   ): Promise<any> {
-    const result = await this.IncomeServices.create(body);
+    const result = await this.ExpenseServices.create(body);
     return {
       status: 200,
       message: "success",
@@ -52,7 +52,7 @@ export class IncomeController {
 
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/update")
-  async update(
+  async updateExpense(
     @Body() body: {
       id: number,
       userKey: string,
@@ -65,7 +65,7 @@ export class IncomeController {
       }
     },
   ): Promise<any> {
-    const result = await this.IncomeServices.update(body.id, body);
+    const result = await this.ExpenseServices.update(body.id, body);
     return {
       status: 200,
       message: "success",
@@ -75,12 +75,12 @@ export class IncomeController {
 
   @Response<{ status: number; message: string }>(500) // error response
   @Delete("/delete")
-  async deleteIncome(
+  async deleteExpense(
     @Body() body: {
       id: number,
     },
   ): Promise<any> {
-    const result = await this.IncomeServices.delete(body.id);
+    const result = await this.ExpenseServices.delete(body.id);
     return {
       status: 200,
       message: "success",

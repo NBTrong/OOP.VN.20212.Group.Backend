@@ -1,24 +1,24 @@
 import { inject, injectable } from "inversify";
 import { REPOSITORIES } from "@n-types/injections/repositories";
-import { ICategoryRepository, IIncomeRepository } from "@n-repositories/interfaces/v1";
-import { IncomeFilter } from "@n-types/filters";
-import { IIncomeServices } from "@n-services/interface";
+import { ICategoryRepository, IExpenseRepository } from "@n-repositories/interfaces/v1";
+import { ExpenseFilter } from "@n-types/filters";
+import { IExpenseServices } from "@n-services/interface";
 
 @injectable()
-export class IncomeServices implements IIncomeServices {
-  @inject(REPOSITORIES.IncomeRepository)
-  private IncomeRepository: IIncomeRepository;
+export class ExpenseServices implements IExpenseServices {
+  @inject(REPOSITORIES.ExpenseRepository)
+  private ExpenseRepository: IExpenseRepository;
 
   @inject(REPOSITORIES.CategoryRepository)
   private CategoryRepository: ICategoryRepository;
 
-  async list (filter: IncomeFilter): Promise<any> {
-    const incomes =  await this.IncomeRepository.list(filter);
-    let incomesWithCategory = [];
-    for (let income of incomes) {
-      const category = await this.CategoryRepository.findById(income.category_id);
-      incomesWithCategory.push({
-        ...income,
+  async list (filter: ExpenseFilter): Promise<any> {
+    const expenses =  await this.ExpenseRepository.list(filter);
+    let expensesWithCategory = [];
+    for (let expense of expenses) {
+      const category = await this.CategoryRepository.findById(expense.category_id);
+      expensesWithCategory.push({
+        ...expense,
         category: {
           id: category.id,
           name: category.name,
@@ -26,7 +26,7 @@ export class IncomeServices implements IIncomeServices {
         }
       });
     }
-    return incomesWithCategory;
+    return expensesWithCategory;
   }
 
   async create (data: any): Promise<any> {
@@ -34,27 +34,27 @@ export class IncomeServices implements IIncomeServices {
       name: data?.name,
       color: data?.color,
     });
-    const income = await this.IncomeRepository.create({
+    const expense = await this.ExpenseRepository.create({
       amount: data.amount,
       note: data.note,
       user_key: data.userKey,
       category_id: category.id,
     });
     return {
-      ...income,
+      ...expense,
       category,
     }
   }
 
   async update (id: number, data: any): Promise<any> {
-    let income = await this.IncomeRepository.findById(id);
-    if (income.user_key !== data.userKey) {
+    let expense = await this.ExpenseRepository.findById(id);
+    if (expense.user_key !== data.userKey) {
       return {
         status: 500,
         message: "user key not match",
       }
     }
-    if (income.category_id !== data?.category?.id) {
+    if (expense.category_id !== data?.category?.id) {
       return {
         status: 500,
         message: "category id not match",
@@ -64,19 +64,19 @@ export class IncomeServices implements IIncomeServices {
       name: data?.category?.name,
       color: data?.category?.color,
     });
-    income = await this.IncomeRepository.updateById(id, {
+    expense = await this.ExpenseRepository.updateById(id, {
       amount: data.amount,
       note: data.note,
       user_key: data.userKey,
       category_id: category.id,
     });
     return {
-      ...income,
+      ...expense,
       category,
     }
   }
 
   async delete (id: number): Promise<boolean> {
-    return await this.IncomeRepository.deleteById(id);
+    return await this.ExpenseRepository.deleteById(id);
   }  
 }
