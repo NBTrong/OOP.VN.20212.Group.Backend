@@ -15,6 +15,7 @@ import { REPOSITORIES } from "@n-types/injections/repositories";
 import { IExpenseServices, IWishListServices } from '@n-services/interface';
 import { ExpenseServices } from '@n-services/ExpenseServices';
 import { CategoryRepository } from '@n-repositories/v1/CategoryRepository';
+import { CategoryServices } from '@n-services/CategoryServices';
 
 const container = new Container({ defaultScope: "Singleton" });
     container
@@ -39,6 +40,9 @@ const container = new Container({ defaultScope: "Singleton" });
     container
     .bind<IWishListServices>(SERVICES.WishListServices)
     .to(WishListServices)
+    container
+    .bind(SERVICES.CategoryServices)
+    .to(CategoryServices)
 let { lazyInject } = getDecorators(container);
 
 export { lazyInject };

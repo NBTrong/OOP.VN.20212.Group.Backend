@@ -5,6 +5,7 @@ import {
   Route,
   Response,
   Body,
+  Patch,
   Delete,
 } from "@tsoa/runtime";
 import { lazyInject } from "@n-configs/container";
@@ -21,7 +22,7 @@ export class ExpenseController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/")
   async getListExpense(
-    @Body() body: { userKey: string },
+    @Body() body: { userKey: string, time: string },
   ): Promise<any> {
     const result = await this.ExpenseServices.list(body);
     return {
@@ -36,10 +37,10 @@ export class ExpenseController {
   async createExpense(
     @Body() body: { 
       userKey: string,
-      amount?: number,
-      note?: string,
-      name?: string,
-      color?: string,
+      amount: number,
+      time: string,
+      categoryId: number,
+      note: string,
     },
   ): Promise<any> {
     const result = await this.ExpenseServices.create(body);
@@ -51,7 +52,7 @@ export class ExpenseController {
   }
 
   @Response<{ status: number; message: string }>(500) // error response
-  @Post("/update")
+  @Patch("/update")
   async updateExpense(
     @Body() body: {
       id: number,

@@ -1,6 +1,6 @@
 import Repository from "../Repository";
 import { injectable } from "inversify";
-import { AnyQueryBuilder } from "objection";
+import { AnyQueryBuilder, raw } from "objection";
 import Expense from "../../models/Expense";
 import { IExpenseRepository } from '@n-repositories/interfaces/v1';
 import { ExpenseFilter } from "@n-types/filters";
@@ -18,6 +18,12 @@ export class ExpenseRepository
     query: AnyQueryBuilder,
     filter: ExpenseFilter,
   ): AnyQueryBuilder {
+    if (filter?.time) {
+      query
+      .whereRaw(`EXTRACT(MONTH FROM time) = ${new Date(filter.time).getMonth() + 1}`)
+      .whereRaw(`EXTRACT(YEAR FROM time) = ${new Date(filter.time).getFullYear()}`);
+    }
+    
     return query.where("user_key", filter.userKey);
   }
 

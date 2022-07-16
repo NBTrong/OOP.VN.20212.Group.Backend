@@ -37,6 +37,136 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/api/v1/category": {
+			"post": {
+				"operationId": "GetListCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Category"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"status": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"status"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/category/report": {
+			"post": {
+				"operationId": "GetReportCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Category"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"status": {
+										"type": "string"
+									},
+									"userKey": {
+										"type": "string"
+									},
+									"time": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"status",
+									"userKey",
+									"time"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/api/v1/expense": {
 			"post": {
 				"operationId": "GetListExpense",
@@ -84,11 +214,15 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"time": {
+										"type": "string"
+									},
 									"userKey": {
 										"type": "string"
 									}
 								},
 								"required": [
+									"time",
 									"userKey"
 								],
 								"type": "object"
@@ -145,13 +279,14 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"color": {
-										"type": "string"
-									},
-									"name": {
-										"type": "string"
-									},
 									"note": {
+										"type": "string"
+									},
+									"categoryId": {
+										"type": "number",
+										"format": "double"
+									},
+									"time": {
 										"type": "string"
 									},
 									"amount": {
@@ -163,6 +298,10 @@
 									}
 								},
 								"required": [
+									"note",
+									"categoryId",
+									"time",
+									"amount",
 									"userKey"
 								],
 								"type": "object"
@@ -173,7 +312,7 @@
 			}
 		},
 		"/api/v1/expense/update": {
-			"post": {
+			"patch": {
 				"operationId": "UpdateExpense",
 				"responses": {
 					"200": {
@@ -372,11 +511,15 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"time": {
+										"type": "string"
+									},
 									"userKey": {
 										"type": "string"
 									}
 								},
 								"required": [
+									"time",
 									"userKey"
 								],
 								"type": "object"
@@ -433,13 +576,14 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"color": {
-										"type": "string"
-									},
-									"name": {
-										"type": "string"
-									},
 									"note": {
+										"type": "string"
+									},
+									"categoryId": {
+										"type": "number",
+										"format": "double"
+									},
+									"time": {
 										"type": "string"
 									},
 									"amount": {
@@ -451,6 +595,10 @@
 									}
 								},
 								"required": [
+									"note",
+									"categoryId",
+									"time",
+									"amount",
 									"userKey"
 								],
 								"type": "object"

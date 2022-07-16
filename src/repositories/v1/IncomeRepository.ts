@@ -18,6 +18,9 @@ export class IncomeRepository
     query: AnyQueryBuilder,
     filter: IncomeFilter,
   ): AnyQueryBuilder {
+    if (filter?.time) {
+      query.whereRaw(`EXTRACT(MONTH FROM time) = ${new Date(filter.time).getMonth() + 1}`).whereRaw(`EXTRACT(YEAR FROM time) = ${new Date(filter.time).getFullYear()}`);
+    }
     return query.where("user_key", filter.userKey);
   }
 

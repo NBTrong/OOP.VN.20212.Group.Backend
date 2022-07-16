@@ -6,6 +6,7 @@ class Expense extends ExtendedModel {
   id!: number;
   amount?: number;
   note?: string;
+  time?: Date | string | null;
   category_id: number;
   user_key: string;
   created_at?: Date | string | null;
@@ -21,6 +22,7 @@ class Expense extends ExtendedModel {
       amount: { type: ["number", "null"] },
       note: { type: ["string", "null"], maxLength: 255 },
       category_id: { type: "integer" },
+      time: { type: ["string", "null"], format: "date-time" },
       user_key: { type: "string", maxLength: 255 },
       created_at: { type: ["string", "null"], format: "date-time" },
       updated_at: { type: ["string", "null"], format: "date-time" },

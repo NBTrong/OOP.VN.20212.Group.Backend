@@ -23,6 +23,8 @@ export class ExpenseServices implements IExpenseServices {
           id: category.id,
           name: category.name,
           color: category.color,
+          icon: category.icon,
+          status: category.status,
         }
       });
     }
@@ -30,14 +32,12 @@ export class ExpenseServices implements IExpenseServices {
   }
 
   async create (data: any): Promise<any> {
-    const category = await this.CategoryRepository.create({
-      name: data?.name,
-      color: data?.color,
-    });
+    const category = await this.CategoryRepository.findById(data?.categoryId);
     const expense = await this.ExpenseRepository.create({
       amount: data.amount,
       note: data.note,
       user_key: data.userKey,
+      time: data.time,
       category_id: category.id,
     });
     return {

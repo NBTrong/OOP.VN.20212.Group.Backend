@@ -8,6 +8,8 @@ class Category extends ExtendedModel {
   id!: number;
   name?: string;
   color?: string;
+  icon?: string;
+  status?: string;
 
   static tableName = "categories";
 
@@ -18,6 +20,8 @@ class Category extends ExtendedModel {
       id: { type: "integer" },
       name: { type: ["string", "null"], maxLength: 255 },
       color: { type: ["string", "null"], maxLength: 255 },
+      icon: { type: ["string", "null"], maxLength: 255 },
+      status: { type: ["string", "null"], maxLength: 255 },
     },
   };
 }
@@ -41,7 +45,7 @@ CategoryModel.relationMappings = {
     modelClass: () => Income,
     join: {
       from: "categories.id",
-      to: "incomes.category_id",
+      to: "income.category_id",
     },
   },
 
