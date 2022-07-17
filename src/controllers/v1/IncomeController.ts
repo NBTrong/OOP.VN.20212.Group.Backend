@@ -4,7 +4,10 @@ import {
   Post,
   Route,
   Response,
+  Path,
+  Get,
   Body,
+  Patch,
   Delete,
 } from "@tsoa/runtime";
 import { lazyInject } from "@n-configs/container";
@@ -17,6 +20,19 @@ import { IIncomeServices } from "@n-services/interface";
 export class IncomeController {
   @lazyInject(SERVICES.IncomeServices)
   private IncomeServices: IIncomeServices;
+
+  @Response<{ status: number; message: string }>(500) // error response
+  @Get("/:id")
+  async getExpense(
+    @Path() id: number,
+  ): Promise<any> {
+    const result = await this.IncomeServices.findById(id);
+    return {
+      status: 200,
+      message: "success",
+      data: result,
+    }
+  }
 
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/")
@@ -51,18 +67,15 @@ export class IncomeController {
   }
 
   @Response<{ status: number; message: string }>(500) // error response
-  @Post("/update")
+  @Patch("/update")
   async update(
     @Body() body: {
       id: number,
       userKey: string,
       amount?: number,
       note?: string,
-      category?: {
-        id: number,
-        name?: string,
-        color?: string,
-      }
+      categoryId?: number,
+      time?: string,
     },
   ): Promise<any> {
     const result = await this.IncomeServices.update(body.id, body);
@@ -78,9 +91,10 @@ export class IncomeController {
   async deleteIncome(
     @Body() body: {
       id: number,
+      userKey: string,
     },
   ): Promise<any> {
-    const result = await this.IncomeServices.delete(body.id);
+    const result = await this.IncomeServices.delete(body.id, body.userKey);
     return {
       status: 200,
       message: "success",

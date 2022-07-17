@@ -7,7 +7,7 @@ class Income extends ExtendedModel {
   amount?: number;
   note?: string;
   user_key!: string;
-  time?: string;
+  time?: Date | string | null;
   category_id: number;
   created_at?: Date | string | null;
   updated_at?: Date | string | null;
@@ -22,7 +22,7 @@ class Income extends ExtendedModel {
       amount: { type: ["number", "null"] },
       note: { type: ["string", "null"], maxLength: 255 },
       category_id: { type: "integer" },
-      time: { type: ["string", "null"] },
+      time: { type: ["string", "null"], format: "date-time" },
       user_key: { type: "string", maxLength: 255 },
       created_at: { type: ["string", "null"], format: "date-time" },
       updated_at: { type: ["string", "null"], format: "date-time" },

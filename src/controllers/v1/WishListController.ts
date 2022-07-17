@@ -6,6 +6,7 @@ import {
   Response,
   Body,
   Delete,
+  Patch,
 } from "@tsoa/runtime";
 import { lazyInject } from "@n-configs/container";
 import { SERVICES } from "@n-types/injections/services";
@@ -21,7 +22,7 @@ export class WishListController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/")
   async getListWishList(
-    @Body() body: { userKey: string },
+    @Body() body: { userKey: string, time: string },
   ): Promise<any> {
     const result = await this.WishListServices.list(body);
     return {
@@ -37,10 +38,8 @@ export class WishListController {
     @Body() body: { 
       userKey: string,
       amount?: number,
-      note?: string,
       name?: string,
-      color?: string,
-      listIndex?: number,
+      time?: string,
     },
   ): Promise<any> {
     const result = await this.WishListServices.create(body);
@@ -52,19 +51,14 @@ export class WishListController {
   }
 
   @Response<{ status: number; message: string }>(500) // error response
-  @Post("/update")
+  @Patch("/update")
   async updateWishList(
     @Body() body: {
       id: number,
       userKey: string,
       amount?: number,
-      note?: string,
-      listIndex?: number,
-      category?: {
-        id: number,
-        name?: string,
-        color?: string,
-      }
+      name?: string,
+      time?: string,
     },
   ): Promise<any> {
     const result = await this.WishListServices.update(body.id, body);
@@ -80,9 +74,10 @@ export class WishListController {
   async deleteWishList(
     @Body() body: {
       id: number,
+      userKey: string,
     },
   ): Promise<any> {
-    const result = await this.WishListServices.delete(body.id);
+    const result = await this.WishListServices.delete(body.id, body.userKey);
     return {
       status: 200,
       message: "success",

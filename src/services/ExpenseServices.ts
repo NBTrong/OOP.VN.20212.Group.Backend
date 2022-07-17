@@ -31,6 +31,15 @@ export class ExpenseServices implements IExpenseServices {
     return expensesWithCategory;
   }
 
+  async findById (id: number): Promise<any> {
+    const expense = await this.ExpenseRepository.findById(id);
+    const category = await this.CategoryRepository.findById(expense.category_id);
+    return {
+      ...expense,
+      category,
+    }
+  }
+
   async create (data: any): Promise<any> {
     const category = await this.CategoryRepository.findById(data?.categoryId);
     const expense = await this.ExpenseRepository.create({
@@ -54,29 +63,20 @@ export class ExpenseServices implements IExpenseServices {
         message: "user key not match",
       }
     }
-    if (expense.category_id !== data?.category?.id) {
-      return {
-        status: 500,
-        message: "category id not match",
-      }
-    }
-    const category = await this.CategoryRepository.update(data?.category?.id, {
-      name: data?.category?.name,
-      color: data?.category?.color,
-    });
     expense = await this.ExpenseRepository.updateById(id, {
-      amount: data.amount,
-      note: data.note,
-      user_key: data.userKey,
-      category_id: category.id,
+      amount: data?.amount || expense.amount,
+      note: data?.note || expense.note,
+      category_id: data?.categoryId || expense.category_id,
+      time: data?.time || expense.time,
     });
+    const category = await this.CategoryRepository.findById(expense.category_id);
     return {
       ...expense,
       category,
     }
   }
 
-  async delete (id: number): Promise<boolean> {
-    return await this.ExpenseRepository.deleteById(id);
+  async delete (id: number, userKey: string): Promise<boolean> {
+    return await this.ExpenseRepository.delete(id, userKey);
   }  
 }

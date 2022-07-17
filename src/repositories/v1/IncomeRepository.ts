@@ -36,8 +36,8 @@ export class IncomeRepository
     return await this.model.query().updateAndFetchById(id, data);
   }
 
-  async deleteById(id: string | number): Promise<boolean> {
-    const result = await this.model.query().deleteById(id);
+  async delete(id: string | number, userKey: string): Promise<boolean> {
+    const result = await this.model.query().deleteById(id).where("user_key", userKey);
     return result === 1 ? true : false;
   }
 }

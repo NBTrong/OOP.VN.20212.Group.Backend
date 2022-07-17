@@ -4,4 +4,5 @@ import { ExpenseFilter } from "@n-types/filters";
 
 export interface IExpenseRepository extends IRepository<typeof Expense> {
   list: (filter: ExpenseFilter) => Promise<typeof Expense["prototype"][]>;
+  delete: (id: string | number, userKey: string) => Promise<boolean>;
 }

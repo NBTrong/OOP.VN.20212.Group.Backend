@@ -167,6 +167,59 @@
 				}
 			}
 		},
+		"/api/v1/expense/{id}": {
+			"get": {
+				"operationId": "GetExpense",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Expense"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
 		"/api/v1/expense": {
 			"post": {
 				"operationId": "GetListExpense",
@@ -358,23 +411,12 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"category": {
-										"properties": {
-											"color": {
-												"type": "string"
-											},
-											"name": {
-												"type": "string"
-											},
-											"id": {
-												"type": "number",
-												"format": "double"
-											}
-										},
-										"required": [
-											"id"
-										],
-										"type": "object"
+									"time": {
+										"type": "string"
+									},
+									"categoryId": {
+										"type": "number",
+										"format": "double"
 									},
 									"note": {
 										"type": "string"
@@ -449,12 +491,16 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"userKey": {
+										"type": "string"
+									},
 									"id": {
 										"type": "number",
 										"format": "double"
 									}
 								},
 								"required": [
+									"userKey",
 									"id"
 								],
 								"type": "object"
@@ -462,6 +508,59 @@
 						}
 					}
 				}
+			}
+		},
+		"/api/v1/income/{id}": {
+			"get": {
+				"operationId": "GetExpense",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string"
+										},
+										"status": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"status"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Income"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		},
 		"/api/v1/income": {
@@ -609,7 +708,7 @@
 			}
 		},
 		"/api/v1/income/update": {
-			"post": {
+			"patch": {
 				"operationId": "Update",
 				"responses": {
 					"200": {
@@ -655,23 +754,12 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"category": {
-										"properties": {
-											"color": {
-												"type": "string"
-											},
-											"name": {
-												"type": "string"
-											},
-											"id": {
-												"type": "number",
-												"format": "double"
-											}
-										},
-										"required": [
-											"id"
-										],
-										"type": "object"
+									"time": {
+										"type": "string"
+									},
+									"categoryId": {
+										"type": "number",
+										"format": "double"
 									},
 									"note": {
 										"type": "string"
@@ -746,12 +834,16 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"userKey": {
+										"type": "string"
+									},
 									"id": {
 										"type": "number",
 										"format": "double"
 									}
 								},
 								"required": [
+									"userKey",
 									"id"
 								],
 								"type": "object"
@@ -808,11 +900,15 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"time": {
+										"type": "string"
+									},
 									"userKey": {
 										"type": "string"
 									}
 								},
 								"required": [
+									"time",
 									"userKey"
 								],
 								"type": "object"
@@ -869,17 +965,10 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"listIndex": {
-										"type": "number",
-										"format": "double"
-									},
-									"color": {
+									"time": {
 										"type": "string"
 									},
 									"name": {
-										"type": "string"
-									},
-									"note": {
 										"type": "string"
 									},
 									"amount": {
@@ -901,7 +990,7 @@
 			}
 		},
 		"/api/v1/wishList/update": {
-			"post": {
+			"patch": {
 				"operationId": "UpdateWishList",
 				"responses": {
 					"200": {
@@ -947,29 +1036,10 @@
 						"application/json": {
 							"schema": {
 								"properties": {
-									"category": {
-										"properties": {
-											"color": {
-												"type": "string"
-											},
-											"name": {
-												"type": "string"
-											},
-											"id": {
-												"type": "number",
-												"format": "double"
-											}
-										},
-										"required": [
-											"id"
-										],
-										"type": "object"
+									"time": {
+										"type": "string"
 									},
-									"listIndex": {
-										"type": "number",
-										"format": "double"
-									},
-									"note": {
+									"name": {
 										"type": "string"
 									},
 									"amount": {
@@ -1042,12 +1112,16 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"userKey": {
+										"type": "string"
+									},
 									"id": {
 										"type": "number",
 										"format": "double"
 									}
 								},
 								"required": [
+									"userKey",
 									"id"
 								],
 								"type": "object"

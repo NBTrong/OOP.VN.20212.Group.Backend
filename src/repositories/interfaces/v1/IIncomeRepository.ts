@@ -4,4 +4,5 @@ import { IncomeFilter } from "@n-types/filters";
 
 export interface IIncomeRepository extends IRepository<typeof Income> {
   list: (filter: IncomeFilter) => Promise<typeof Income["prototype"][]>;
+  delete: (id: string | number, userKey: string) => Promise<boolean>;
 }

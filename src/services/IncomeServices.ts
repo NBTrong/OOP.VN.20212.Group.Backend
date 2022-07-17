@@ -31,6 +31,15 @@ export class IncomeServices implements IIncomeServices {
     return incomesWithCategory;
   }
 
+  async findById (id: number): Promise<any> {
+    const income = await this.IncomeRepository.findById(id);
+    const category = await this.CategoryRepository.findById(income.category_id);
+    return {
+      ...income,
+      category,
+    }
+  }
+
   async create (data: any): Promise<any> {
     const category = await this.CategoryRepository.findById(data?.categoryId);
     const income = await this.IncomeRepository.create({
@@ -54,29 +63,20 @@ export class IncomeServices implements IIncomeServices {
         message: "user key not match",
       }
     }
-    if (income.category_id !== data?.category?.id) {
-      return {
-        status: 500,
-        message: "category id not match",
-      }
-    }
-    const category = await this.CategoryRepository.update(data?.category?.id, {
-      name: data?.category?.name,
-      color: data?.category?.color,
-    });
     income = await this.IncomeRepository.updateById(id, {
-      amount: data.amount,
-      note: data.note,
-      user_key: data.userKey,
-      category_id: category.id,
+      amount: data?.amount || income.amount,
+      note: data?.note || income.note,
+      category_id: data?.categoryId || income.category_id,
+      time: data?.time || income.time,
     });
+    const category = await this.CategoryRepository.findById(income.category_id);
     return {
       ...income,
       category,
     }
   }
 
-  async delete (id: number): Promise<boolean> {
-    return await this.IncomeRepository.deleteById(id);
+  async delete (id: number, userKey: string): Promise<boolean> {
+    return await this.IncomeRepository.delete(id, userKey);
   }  
 }

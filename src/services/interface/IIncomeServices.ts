@@ -5,5 +5,6 @@ export interface IIncomeServices {
   list: (filter: IncomeFilter) => Promise<typeof Income["prototype"]>;
   create: (data: any) => Promise<typeof Income["prototype"]>;
   update: (id: number, data: any) => Promise<typeof Income["prototype"]>;
-  delete: (id: number) => Promise<boolean>;
+  delete: (id: number, userKey: string) => Promise<boolean>;
+  findById: (id: number) => Promise<typeof Income["prototype"]>;
 }

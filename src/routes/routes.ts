@@ -76,6 +76,31 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/api/v1/expense/:id',
+            ...(fetchMiddlewares<RequestHandler>(ExpenseController)),
+            ...(fetchMiddlewares<RequestHandler>(ExpenseController.prototype.getExpense)),
+
+            function ExpenseController_getExpense(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"path","name":"id","required":true,"dataType":"double"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new ExpenseController();
+
+
+              const promise = controller.getExpense.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.post('/api/v1/expense',
             ...(fetchMiddlewares<RequestHandler>(ExpenseController)),
             ...(fetchMiddlewares<RequestHandler>(ExpenseController.prototype.getListExpense)),
@@ -132,7 +157,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function ExpenseController_updateExpense(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"category":{"dataType":"nestedObjectLiteral","nestedProperties":{"color":{"dataType":"string"},"name":{"dataType":"string"},"id":{"dataType":"double","required":true}}},"note":{"dataType":"string"},"amount":{"dataType":"double"},"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"time":{"dataType":"string"},"categoryId":{"dataType":"double"},"note":{"dataType":"string"},"amount":{"dataType":"double"},"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -157,7 +182,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function ExpenseController_deleteExpense(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"double","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -170,6 +195,31 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.deleteExpense.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/api/v1/income/:id',
+            ...(fetchMiddlewares<RequestHandler>(IncomeController)),
+            ...(fetchMiddlewares<RequestHandler>(IncomeController.prototype.getExpense)),
+
+            function IncomeController_getExpense(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"path","name":"id","required":true,"dataType":"double"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new IncomeController();
+
+
+              const promise = controller.getExpense.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
@@ -226,13 +276,13 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/api/v1/income/update',
+        app.patch('/api/v1/income/update',
             ...(fetchMiddlewares<RequestHandler>(IncomeController)),
             ...(fetchMiddlewares<RequestHandler>(IncomeController.prototype.update)),
 
             function IncomeController_update(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"category":{"dataType":"nestedObjectLiteral","nestedProperties":{"color":{"dataType":"string"},"name":{"dataType":"string"},"id":{"dataType":"double","required":true}}},"note":{"dataType":"string"},"amount":{"dataType":"double"},"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"time":{"dataType":"string"},"categoryId":{"dataType":"double"},"note":{"dataType":"string"},"amount":{"dataType":"double"},"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -257,7 +307,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function IncomeController_deleteIncome(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"double","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -282,7 +332,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function WishListController_getListWishList(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"userKey":{"dataType":"string","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"time":{"dataType":"string","required":true},"userKey":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -307,7 +357,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function WishListController_createWishList(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"listIndex":{"dataType":"double"},"color":{"dataType":"string"},"name":{"dataType":"string"},"note":{"dataType":"string"},"amount":{"dataType":"double"},"userKey":{"dataType":"string","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"time":{"dataType":"string"},"name":{"dataType":"string"},"amount":{"dataType":"double"},"userKey":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -326,13 +376,13 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/api/v1/wishList/update',
+        app.patch('/api/v1/wishList/update',
             ...(fetchMiddlewares<RequestHandler>(WishListController)),
             ...(fetchMiddlewares<RequestHandler>(WishListController.prototype.updateWishList)),
 
             function WishListController_updateWishList(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"category":{"dataType":"nestedObjectLiteral","nestedProperties":{"color":{"dataType":"string"},"name":{"dataType":"string"},"id":{"dataType":"double","required":true}}},"listIndex":{"dataType":"double"},"note":{"dataType":"string"},"amount":{"dataType":"double"},"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"time":{"dataType":"string"},"name":{"dataType":"string"},"amount":{"dataType":"double"},"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -357,7 +407,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function WishListController_deleteWishList(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"dataType":"double","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"userKey":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
