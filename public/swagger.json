@@ -275,7 +275,6 @@
 									}
 								},
 								"required": [
-									"time",
 									"userKey"
 								],
 								"type": "object"
@@ -618,7 +617,6 @@
 									}
 								},
 								"required": [
-									"time",
 									"userKey"
 								],
 								"type": "object"

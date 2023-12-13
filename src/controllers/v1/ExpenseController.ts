@@ -37,7 +37,7 @@ export class ExpenseController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/")
   async getListExpense(
-    @Body() body: { userKey: string, time: string },
+    @Body() body: { userKey: string, time?: string },
   ): Promise<any> {
     const result = await this.ExpenseServices.list(body);
     return {
@@ -50,7 +50,7 @@ export class ExpenseController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/create")
   async createExpense(
-    @Body() body: { 
+    @Body() body: {
       userKey: string,
       amount: number,
       time: string,

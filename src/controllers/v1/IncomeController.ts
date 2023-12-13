@@ -37,7 +37,7 @@ export class IncomeController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/")
   async getListIncome(
-    @Body() body: { userKey: string, time: string },
+    @Body() body: { userKey: string, time?: string },
   ): Promise<any> {
     const result = await this.IncomeServices.list(body);
     return {
@@ -50,7 +50,7 @@ export class IncomeController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/create")
   async createIncome(
-    @Body() body: { 
+    @Body() body: {
       userKey: string,
       amount: number,
       time: string,
