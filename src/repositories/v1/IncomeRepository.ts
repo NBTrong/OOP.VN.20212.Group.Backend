@@ -8,8 +8,7 @@ import { IncomeFilter } from "@n-types/filters";
 @injectable()
 export class IncomeRepository
   extends Repository<typeof Income>
-  implements IIncomeRepository
-{
+  implements IIncomeRepository {
   initializeModel(): typeof Income {
     return Income;
   }
@@ -21,7 +20,7 @@ export class IncomeRepository
     if (filter?.time) {
       query.whereRaw(`EXTRACT(MONTH FROM time) = ${new Date(filter.time).getMonth() + 1}`).whereRaw(`EXTRACT(YEAR FROM time) = ${new Date(filter.time).getFullYear()}`);
     }
-    return query.where("user_key", filter.userKey);
+    return query.where("user_key", filter.userKey).orderBy('time', 'desc');
   }
 
   async list(filter: IncomeFilter): Promise<typeof Income["prototype"][]> {

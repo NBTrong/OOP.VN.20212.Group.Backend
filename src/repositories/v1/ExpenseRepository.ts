@@ -8,8 +8,7 @@ import { ExpenseFilter } from "@n-types/filters";
 @injectable()
 export class ExpenseRepository
   extends Repository<typeof Expense>
-  implements IExpenseRepository
-{
+  implements IExpenseRepository {
   initializeModel(): typeof Expense {
     return Expense;
   }
@@ -20,11 +19,11 @@ export class ExpenseRepository
   ): AnyQueryBuilder {
     if (filter?.time) {
       query
-      .whereRaw(`EXTRACT(MONTH FROM time) = ${new Date(filter.time).getMonth() + 1}`)
-      .whereRaw(`EXTRACT(YEAR FROM time) = ${new Date(filter.time).getFullYear()}`);
+        .whereRaw(`EXTRACT(MONTH FROM time) = ${new Date(filter.time).getMonth() + 1}`)
+        .whereRaw(`EXTRACT(YEAR FROM time) = ${new Date(filter.time).getFullYear()}`);
     }
-    
-    return query.where("user_key", filter.userKey);
+
+    return query.where("user_key", filter.userKey).orderBy('time', 'desc');
   }
 
   async list(filter: ExpenseFilter): Promise<typeof Expense["prototype"][]> {
