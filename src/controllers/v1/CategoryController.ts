@@ -20,9 +20,27 @@ export class CategoryController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/")
   async getListCategory(
-    @Body() body: { status: string },
+    @Body() body: { status: string, isPlan?: boolean },
   ): Promise<any> {
     const result = await this.CategoryServices.list(body);
+    return {
+      status: 200,
+      message: "success",
+      data: result,
+    }
+  }
+
+  @Response<{ status: number; message: string }>(500) // error response
+  @Post("/update")
+  async createCategory(
+    @Body() body: { id: number, amount: number },
+  ): Promise<any> {
+    const result = await this.CategoryServices.update({
+      id: body.id,
+      data: {
+        amount: body.amount
+      }
+    });
     return {
       status: 200,
       message: "success",

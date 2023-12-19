@@ -8,8 +8,7 @@ import { CategoryFilter, ExpenseFilter, ReportFilter } from "@n-types/filters";
 @injectable()
 export class CategoryRepository
   extends Repository<typeof Category>
-  implements ICategoryRepository
-{
+  implements ICategoryRepository {
   initializeModel(): typeof Category {
     return Category;
   }
@@ -34,17 +33,21 @@ export class CategoryRepository
   }
 
   async list(filter: CategoryFilter): Promise<typeof Category["prototype"][]> {
-    return await this.model.query().where("status", filter.status);
+    const query = this.model.query().where("status", filter.status);
+    if (!!filter.isPlan) {
+      query.andWhere('amount', '>', 0);
+    }
+    return await query;
   }
 
   async report(filter: ReportFilter): Promise<typeof Category["prototype"][]> {
     return await Category.query()
-    .select("categories.*")
-    .select(raw('sum(amount)').as('totalAmount'))
-    .joinRelated(`${filter.status === 'expense' ? 'expenses' : 'incomes'}`)
-    .whereRaw(`EXTRACT(MONTH FROM time) = ${new Date(filter.time).getMonth() + 1}`)
-    .whereRaw(`EXTRACT(YEAR FROM time) = ${new Date(filter.time).getFullYear()}`)
-    .where("user_key", filter.userKey)
-    .groupBy("categories.id")
+      .select("categories.*")
+      .select(raw('sum(amount)').as('totalAmount'))
+      .joinRelated(`${filter.status === 'expense' ? 'expenses' : 'incomes'}`)
+      .whereRaw(`EXTRACT(MONTH FROM time) = ${new Date(filter.time).getMonth() + 1}`)
+      .whereRaw(`EXTRACT(YEAR FROM time) = ${new Date(filter.time).getFullYear()}`)
+      .where("user_key", filter.userKey)
+      .groupBy("categories.id")
   }
 }

@@ -1,6 +1,6 @@
 import { ExtendedModel } from "./ExtendedModel";
 import { db } from "@n-configs/database";
-import Expense  from "./Expense";
+import Expense from "./Expense";
 import Income from "./Income";
 import WishList from "./WishList";
 
@@ -9,6 +9,7 @@ class Category extends ExtendedModel {
   name?: string;
   color?: string;
   icon?: string;
+  amount?: number;
   status?: string;
 
   static tableName = "categories";
@@ -20,6 +21,7 @@ class Category extends ExtendedModel {
       id: { type: "integer" },
       name: { type: ["string", "null"], maxLength: 255 },
       color: { type: ["string", "null"], maxLength: 255 },
+      number: { type: ["number"] },
       icon: { type: ["string", "null"], maxLength: 255 },
       status: { type: ["string", "null"], maxLength: 255 },
     },

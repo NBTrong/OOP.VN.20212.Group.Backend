@@ -1,5 +1,6 @@
 export declare type CategoryFilter = {
   status: string;
+  isPlan?: boolean;
 };
 
 export declare type ReportFilter = {
@@ -7,3 +8,10 @@ export declare type ReportFilter = {
   userKey: string;
   status: string;
 };
+
+export declare type UpdateCategoryFilter = {
+  id: string | number;
+  data: {
+    amount: number;
+  }
+}
