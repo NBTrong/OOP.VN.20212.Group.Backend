@@ -37,7 +37,7 @@ export class CategoryRepository
     if (!!filter.isPlan) {
       query.andWhere('amount', '>', 0);
     }
-    return await query;
+    return await query.orderBy('created_at', 'desc');
   }
 
   async report(filter: ReportFilter): Promise<typeof Category["prototype"][]> {

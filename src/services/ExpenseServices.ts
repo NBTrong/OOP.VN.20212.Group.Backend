@@ -12,8 +12,8 @@ export class ExpenseServices implements IExpenseServices {
   @inject(REPOSITORIES.CategoryRepository)
   private CategoryRepository: ICategoryRepository;
 
-  async list (filter: ExpenseFilter): Promise<any> {
-    const expenses =  await this.ExpenseRepository.list(filter);
+  async list(filter: ExpenseFilter): Promise<any> {
+    const expenses = await this.ExpenseRepository.list(filter);
     let expensesWithCategory = [];
     for (let expense of expenses) {
       const category = await this.CategoryRepository.findById(expense.category_id);
@@ -25,13 +25,14 @@ export class ExpenseServices implements IExpenseServices {
           color: category.color,
           icon: category.icon,
           status: category.status,
+          amount: category.amount
         }
       });
     }
     return expensesWithCategory;
   }
 
-  async findById (id: number): Promise<any> {
+  async findById(id: number): Promise<any> {
     const expense = await this.ExpenseRepository.findById(id);
     const category = await this.CategoryRepository.findById(expense.category_id);
     return {
@@ -40,7 +41,7 @@ export class ExpenseServices implements IExpenseServices {
     }
   }
 
-  async create (data: any): Promise<any> {
+  async create(data: any): Promise<any> {
     const category = await this.CategoryRepository.findById(data?.categoryId);
     const expense = await this.ExpenseRepository.create({
       amount: data.amount,
@@ -55,7 +56,7 @@ export class ExpenseServices implements IExpenseServices {
     }
   }
 
-  async update (id: number, data: any): Promise<any> {
+  async update(id: number, data: any): Promise<any> {
     let expense = await this.ExpenseRepository.findById(id);
     if (expense.user_key !== data.userKey) {
       return {
@@ -76,7 +77,7 @@ export class ExpenseServices implements IExpenseServices {
     }
   }
 
-  async delete (id: number, userKey: string): Promise<boolean> {
+  async delete(id: number, userKey: string): Promise<boolean> {
     return await this.ExpenseRepository.delete(id, userKey);
-  }  
+  }
 }

@@ -12,8 +12,8 @@ export class IncomeServices implements IIncomeServices {
   @inject(REPOSITORIES.CategoryRepository)
   private CategoryRepository: ICategoryRepository;
 
-  async list (filter: IncomeFilter): Promise<any> {
-    const incomes =  await this.IncomeRepository.list(filter);
+  async list(filter: IncomeFilter): Promise<any> {
+    const incomes = await this.IncomeRepository.list(filter);
     let incomesWithCategory = [];
     for (let income of incomes) {
       const category = await this.CategoryRepository.findById(income.category_id);
@@ -25,13 +25,14 @@ export class IncomeServices implements IIncomeServices {
           color: category.color,
           icon: category.icon,
           status: category.status,
+          amount: category.amount
         }
       });
     }
     return incomesWithCategory;
   }
 
-  async findById (id: number): Promise<any> {
+  async findById(id: number): Promise<any> {
     const income = await this.IncomeRepository.findById(id);
     const category = await this.CategoryRepository.findById(income.category_id);
     return {
@@ -40,7 +41,7 @@ export class IncomeServices implements IIncomeServices {
     }
   }
 
-  async create (data: any): Promise<any> {
+  async create(data: any): Promise<any> {
     const category = await this.CategoryRepository.findById(data?.categoryId);
     const income = await this.IncomeRepository.create({
       amount: data.amount,
@@ -55,7 +56,7 @@ export class IncomeServices implements IIncomeServices {
     }
   }
 
-  async update (id: number, data: any): Promise<any> {
+  async update(id: number, data: any): Promise<any> {
     let income = await this.IncomeRepository.findById(id);
     if (income.user_key !== data.userKey) {
       return {
@@ -76,7 +77,7 @@ export class IncomeServices implements IIncomeServices {
     }
   }
 
-  async delete (id: number, userKey: string): Promise<boolean> {
+  async delete(id: number, userKey: string): Promise<boolean> {
     return await this.IncomeRepository.delete(id, userKey);
-  }  
+  }
 }

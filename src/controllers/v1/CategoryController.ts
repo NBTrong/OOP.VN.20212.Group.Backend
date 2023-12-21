@@ -38,7 +38,7 @@ export class CategoryController {
     const result = await this.CategoryServices.update({
       id: body.id,
       data: {
-        amount: body.amount
+        amount: Number(body.amount)
       }
     });
     return {
