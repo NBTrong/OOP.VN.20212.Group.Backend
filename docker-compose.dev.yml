@@ -32,11 +32,11 @@ services:
       - emo-server-express-database:/var/lib/postgres
       - ./docker/postgres/database:/docker-entrypoint-initdb.d
     environment:
-      POSTGRES_DB: emoDatabase
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - 54321:5432
+      - ${DB_PORT}:${DB_PORT}
     networks:
       - emo-server-express-network
 
