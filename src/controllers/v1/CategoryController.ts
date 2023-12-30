@@ -20,7 +20,7 @@ export class CategoryController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/")
   async getListCategory(
-    @Body() body: { status: string, isPlan?: boolean },
+    @Body() body: { status: string, isPlan?: boolean, user_key: string },
   ): Promise<any> {
     const result = await this.CategoryServices.list(body);
     return {
@@ -33,10 +33,11 @@ export class CategoryController {
   @Response<{ status: number; message: string }>(500) // error response
   @Post("/update")
   async createCategory(
-    @Body() body: { id: number, amount: number },
+    @Body() body: { id: number, amount: number, user_key: string },
   ): Promise<any> {
     const result = await this.CategoryServices.update({
       id: body.id,
+      user_key: body.user_key,
       data: {
         amount: Number(body.amount)
       }

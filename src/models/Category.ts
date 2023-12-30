@@ -3,6 +3,7 @@ import { db } from "@n-configs/database";
 import Expense from "./Expense";
 import Income from "./Income";
 import WishList from "./WishList";
+import PlanModel from "./Plan";
 
 class Category extends ExtendedModel {
   id!: number;
@@ -43,11 +44,20 @@ CategoryModel.relationMappings = {
   },
 
   incomes: {
-    relation: ExtendedModel.BelongsToOneRelation,
+    relation: ExtendedModel.HasManyRelation,
     modelClass: () => Income,
     join: {
       from: "categories.id",
       to: "income.category_id",
+    },
+  },
+
+  plans: {
+    relation: ExtendedModel.HasManyRelation,
+    modelClass: () => PlanModel,
+    join: {
+      from: "categories.id",
+      to: "plans.category_id",
     },
   },
 

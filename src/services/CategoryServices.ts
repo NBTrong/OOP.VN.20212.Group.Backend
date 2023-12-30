@@ -1,3 +1,4 @@
+import PlanModel from '@n-models/Plan';
 import { inject, injectable } from "inversify";
 import { REPOSITORIES } from "@n-types/injections/repositories";
 import { ICategoryRepository } from "@n-repositories/interfaces/v1";
@@ -14,7 +15,15 @@ export class CategoryServices implements ICategoryServices {
   }
 
   async update(filter: UpdateCategoryFilter): Promise<any> {
-    return this.CategoryRepository.update(filter.id, filter.data);
+    // return this.CategoryRepository.update(filter.id, filter.data);
+    return PlanModel.query()
+      .insert({
+        user_key: filter.user_key,
+        category_id: filter.id,
+        amount: filter.data.amount
+      })
+      .onConflict(['user_key', 'category_id'])
+      .merge(['amount'])
   }
 
 

@@ -84,7 +84,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function CategoryController_getListCategory(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"isPlan":{"dataType":"boolean"},"status":{"dataType":"string","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"user_key":{"dataType":"string","required":true},"isPlan":{"dataType":"boolean"},"status":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -109,7 +109,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function CategoryController_createCategory(request: any, response: any, next: any) {
             const args = {
-                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"amount":{"dataType":"double","required":true},"id":{"dataType":"double","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"user_key":{"dataType":"string","required":true},"amount":{"dataType":"double","required":true},"id":{"dataType":"double","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

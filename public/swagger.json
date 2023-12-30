@@ -214,6 +214,9 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"user_key": {
+										"type": "string"
+									},
 									"isPlan": {
 										"type": "boolean"
 									},
@@ -222,6 +225,7 @@
 									}
 								},
 								"required": [
+									"user_key",
 									"status"
 								],
 								"type": "object"
@@ -278,6 +282,9 @@
 						"application/json": {
 							"schema": {
 								"properties": {
+									"user_key": {
+										"type": "string"
+									},
 									"amount": {
 										"type": "number",
 										"format": "double"
@@ -288,6 +295,7 @@
 									}
 								},
 								"required": [
+									"user_key",
 									"amount",
 									"id"
 								],
