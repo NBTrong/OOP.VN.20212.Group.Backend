@@ -34,11 +34,11 @@ export class CategoryRepository
 
   async list(filter: CategoryFilter): Promise<typeof Category["prototype"][]> {
     const query = this.model.query()
-      .select(["categories.*", "plans.amount as amount"])
-      .leftJoinRelated("plans")
       .where("status", filter.status)
     if (!!filter.isPlan) {
-      query.andWhere('amount', '>', 0)
+      query.select(["categories.*", "plans.amount as amount"])
+        .leftJoinRelated("plans")
+        .andWhere('amount', '>', 0)
         .where("plans.user_key", filter.user_key)
     }
     return await query.orderBy('created_at', 'asc');
