@@ -21,31 +21,23 @@ export class AuthController {
       password: string
     },
   ): Promise<any> {
-    try {
-      const { email, password } = body;
+    const { email, password } = body;
 
-      const user = await User.query()
-        .select("*")
-        .where("email", email)
-        .first();
+    const user = await User.query()
+      .select("*")
+      .where("email", email)
+      .first();
 
-      if (!user)
-        throw new Error("User not found")
+    if (!user)
+      throw new Error("User not found")
 
-      if (user.password !== password)
-        throw new Error("Email or password error")
+    if (user.password !== password)
+      throw new Error("Email or password error")
 
-      return {
-        status: 200,
-        message: "success",
-        data: user,
-      }
-    } catch (err: any) {
-      return {
-        status: 500,
-        message: "error",
-        data: err?.message,
-      }
+    return {
+      status: 200,
+      message: "success",
+      data: user,
     }
   }
 
@@ -57,36 +49,28 @@ export class AuthController {
       password: string
     },
   ): Promise<any> {
-    try {
-      const { email, password } = body;
+    const { email, password } = body;
 
-      const user = await User.query()
-        .select("*")
-        .where("email", email)
-        .first();
+    const user = await User.query()
+      .select("*")
+      .where("email", email)
+      .first();
 
-      if (user)
-        throw new Error("Email is existed")
+    if (user)
+      throw new Error("Email is existed")
 
-      const user_key = uuidv4();
+    const user_key = uuidv4();
 
-      const newUser = await User.query().insert({
-        email,
-        password,
-        user_key
-      })
+    const newUser = await User.query().insert({
+      email,
+      password,
+      user_key
+    })
 
-      return {
-        status: 200,
-        message: "success",
-        data: newUser,
-      }
-    } catch (err: any) {
-      return {
-        status: 500,
-        message: "error",
-        data: err?.message,
-      }
+    return {
+      status: 200,
+      message: "success",
+      data: newUser,
     }
   }
 }
